@@ -79,24 +79,12 @@ export function DynamicChart({
     switch (chartConfig.type) {
       case "bar":
         return (
-          <BarChart data={chartData}>
+          <BarChart data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 20 }}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey={chartConfig.xKey}>
-              <Label
-                value={toTitleCase(chartConfig.xKey)}
-                offset={0}
-                position="insideBottom"
-              />
-            </XAxis>
-            <YAxis>
-              <Label
-                value={toTitleCase(chartConfig.yKeys[0])}
-                angle={-90}
-                position="insideLeft"
-              />
-            </YAxis>
+            <XAxis dataKey={chartConfig.xKey} tick={{ fontSize: 14 }} />
+            <YAxis tick={{ fontSize: 14 }} />
             <ChartTooltip content={<ChartTooltipContent />} />
-            {chartConfig.legend && <Legend />}
+            {chartConfig.legend && <Legend wrapperStyle={{ fontSize: "14px" }} />}
             {chartConfig.yKeys.map((key, index) => (
               <Bar
                 key={key}
@@ -118,28 +106,12 @@ export function DynamicChart({
         // console.log(useTransformedData, "useTransformedData");
         // const useTransformedData = false;
         return (
-          <LineChart data={useTransformedData ? data : chartData}>
+          <LineChart data={useTransformedData ? data : chartData} margin={{ top: 5, right: 30, left: 20, bottom: 20 }}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis
-              dataKey={useTransformedData ? chartConfig.xKey : chartConfig.xKey}
-            >
-              <Label
-                value={toTitleCase(
-                  useTransformedData ? xAxisField : chartConfig.xKey,
-                )}
-                offset={0}
-                position="insideBottom"
-              />
-            </XAxis>
-            <YAxis>
-              <Label
-                value={toTitleCase(chartConfig.yKeys[0])}
-                angle={-90}
-                position="insideLeft"
-              />
-            </YAxis>
+            <XAxis dataKey={useTransformedData ? chartConfig.xKey : chartConfig.xKey} tick={{ fontSize: 14 }} />
+            <YAxis tick={{ fontSize: 14 }} />
             <ChartTooltip content={<ChartTooltipContent />} />
-            {chartConfig.legend && <Legend />}
+            {chartConfig.legend && <Legend wrapperStyle={{ fontSize: "14px" }} />}
             {useTransformedData
               ? lineFields.map((key, index) => (
                   <Line
@@ -161,12 +133,12 @@ export function DynamicChart({
         );
       case "area":
         return (
-          <AreaChart data={chartData}>
+          <AreaChart data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 20 }}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey={chartConfig.xKey} />
-            <YAxis />
+            <XAxis dataKey={chartConfig.xKey} tick={{ fontSize: 14 }} />
+            <YAxis tick={{ fontSize: 14 }} />
             <ChartTooltip content={<ChartTooltipContent />} />
-            {chartConfig.legend && <Legend />}
+            {chartConfig.legend && <Legend wrapperStyle={{ fontSize: "14px" }} />}
             {chartConfig.yKeys.map((key, index) => (
               <Area
                 key={key}
@@ -180,7 +152,7 @@ export function DynamicChart({
         );
       case "pie":
         return (
-          <PieChart>
+          <PieChart margin={{ top: 5, right: 30, left: 20, bottom: 20 }}>
             <Pie
               data={chartData}
               dataKey={chartConfig.yKeys[0]}
@@ -197,7 +169,7 @@ export function DynamicChart({
               ))}
             </Pie>
             <ChartTooltip content={<ChartTooltipContent />} />
-            {chartConfig.legend && <Legend />}
+            {chartConfig.legend && <Legend wrapperStyle={{ fontSize: "14px" }} />}
           </PieChart>
         );
       default:
@@ -206,28 +178,32 @@ export function DynamicChart({
   };
 
   return (
-    <div className="w-full flex flex-col justify-center items-center">
-      <h2 className="text-lg font-bold mb-2">{chartConfig.title}</h2>
-      {chartConfig && chartData.length > 0 && (
-        <ChartContainer
-          config={chartConfig.yKeys.reduce(
-            (acc, key, index) => {
-              acc[key] = {
-                label: key,
-                color: colors[index % colors.length],
-              };
-              return acc;
-            },
-            {} as Record<string, { label: string; color: string }>,
-          )}
-          className="h-[320px] w-full"
-        >
-          {renderChart()}
-        </ChartContainer>
-      )}
-      <div className="w-full">
-        <p className="mt-4 text-sm">{chartConfig.description}</p>
-        <p className="mt-4 text-sm">{chartConfig.takeaway}</p>
+    <div className="w-full h-full flex flex-col items-center py-2">
+      {/* Chart takes ~80% of available space */}
+      <div className="w-full flex-[4] min-h-0">
+        {chartConfig && chartData.length > 0 && (
+          <ChartContainer
+            config={chartConfig.yKeys.reduce(
+              (acc, key, index) => {
+                acc[key] = {
+                  label: key,
+                  color: colors[index % colors.length],
+                };
+                return acc;
+              },
+              {} as Record<string, { label: string; color: string }>,
+            )}
+            className="w-full h-full"
+          >
+            {renderChart()}
+          </ChartContainer>
+        )}
+      </div>
+
+      {/* Text takes ~20% of available space */}
+      <div className="w-full px-8 pt-2 flex-1 flex flex-col justify-center space-y-2">
+        <p className="text-sm md:text-base text-muted-foreground text-center leading-relaxed">{chartConfig.description}</p>
+        <p className="text-sm md:text-base font-semibold text-center leading-relaxed">{chartConfig.takeaway}</p>
       </div>
     </div>
   );
