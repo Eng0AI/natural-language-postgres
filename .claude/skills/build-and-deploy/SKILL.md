@@ -1,5 +1,5 @@
 ---
-name: build-deploy
+name: build-and-deploy
 description: Build and deploy this Next.js application with PostgreSQL database. Use when building, deploying, setting up database, or preparing the project for production. Triggers on requests to build, deploy, seed database, or publish.
 ---
 
