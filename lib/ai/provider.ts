@@ -16,7 +16,6 @@
 import { anthropic } from "@ai-sdk/anthropic";
 import { google } from "@ai-sdk/google";
 import { openai } from "@ai-sdk/openai";
-import type { LanguageModelV2 } from "@ai-sdk/provider";
 
 export type LLMProviderType = "openai" | "anthropic" | "google";
 
@@ -57,7 +56,7 @@ export function getLLMModel(): string {
 /**
  * Get the language model instance based on environment configuration
  */
-export function getLanguageModel(): LanguageModelV2 {
+export function getLanguageModel() {
   const provider = getLLMProvider();
   const modelId = getLLMModel();
 

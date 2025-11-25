@@ -14,7 +14,7 @@
   "dependencies": {
     "@ai-sdk/anthropic": "^2.0.48",
     "@ai-sdk/google": "^2.0.43",
-    "@ai-sdk/openai": "^1.0.8",
+    "@ai-sdk/openai": "^2.0.0",
     "@ai-sdk/provider": "^2.0.0",
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-slot": "^1.1.0",
@@ -27,7 +27,7 @@
     "@types/react-dom": "19.0.2",
     "@types/recharts": "^1.8.29",
     "@vercel/postgres": "0.10.0",
-    "ai": "^4.0.16",
+    "ai": "^5.0.0",
     "autoprefixer": "10.4.20",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -50,7 +50,7 @@
     "tailwindcss-animate": "^1.0.7",
     "typescript": "5.7.2",
     "vaul": "^1.1.1",
-    "zod": "^3.24.1"
+    "zod": "^3.25.0"
   },
   "devDependencies": {
     "csv-parser": "^3.0.0",
