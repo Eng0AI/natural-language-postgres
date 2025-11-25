@@ -12,7 +12,10 @@
     "seed": "tsx lib/seed.ts"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^2.0.48",
+    "@ai-sdk/google": "^2.0.43",
     "@ai-sdk/openai": "^1.0.8",
+    "@ai-sdk/provider": "^2.0.0",
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-tabs": "^1.1.1",
