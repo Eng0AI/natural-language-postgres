@@ -1,6 +1,6 @@
 ---
 name: build-and-deploy
-description: Build and deploy this Next.js application with PostgreSQL database. Use when building, deploying, setting up database, or preparing the project for production. Triggers on requests to build, deploy, seed database, or publish.
+description: Build and deploy this Next.js application with PostgreSQL database. Use when building, deploying, setting up database, or preparing the project for production.
 ---
 
 # Build and Deploy Natural Language Postgres
@@ -9,35 +9,35 @@ description: Build and deploy this Next.js application with PostgreSQL database.
 
 Build and deploy the natural language PostgreSQL query application. This Next.js project provides an AI-powered natural language interface to query and visualize PostgreSQL data.
 
-## Environment Variables
-
-All required environment variables are pre-configured in CCVM and available directly:
-- `OPENAI_API_KEY` - OpenAI API key for natural language processing
-- `POSTGRES_URL` - PostgreSQL connection string
-- `POSTGRES_PRISMA_URL` - Prisma accelerate connection (optional)
-- `VERCEL_TOKEN` - For Vercel CLI authentication
-- `NETLIFY_AUTH_TOKEN` - For Netlify CLI authentication
-
 ## Workflow
 
 ### 1. Setup Environment Variables
 
+**Read `.env.example` to see all required variables:**
+
 ```bash
-cp .env.example .env
+cat .env.example
 ```
 
-Then populate `.env` with values from environment:
-- `OPENAI_API_KEY` - Available as `$OPENAI_API_KEY` in VM environment
-- `POSTGRES_URL` - Available as `$POSTGRES_URL` in VM environment
+**Create `.env` by reading values from current environment:**
 
-Example:
+For each variable in `.env.example`, read the value from the current environment and write to `.env`. Example approach:
+
 ```bash
-cat > .env << EOF
-OPENAI_API_KEY="${OPENAI_API_KEY}"
-POSTGRES_URL="${POSTGRES_URL}"
-POSTGRES_PRISMA_URL="${POSTGRES_PRISMA_URL:-}"
-EOF
+# Read .env.example and create .env with values from current environment
+while IFS= read -r line || [[ -n "$line" ]]; do
+  # Skip comments and empty lines
+  [[ "$line" =~ ^#.*$ || -z "$line" ]] && continue
+  # Extract variable name (before = sign)
+  var_name=$(echo "$line" | cut -d'=' -f1)
+  # Get value from environment
+  var_value="${!var_name}"
+  # Write to .env
+  echo "${var_name}=${var_value}" >> .env
+done < .env.example
 ```
+
+Or manually inspect `.env.example` and create `.env` with the required values from environment variables.
 
 ### 2. Install Dependencies
 
@@ -79,27 +79,16 @@ netlify deploy --prod --create-site
 netlify deploy --prod
 ```
 
-## Database Setup
-
-If database not yet provisioned:
-
-```bash
-# Create Vercel Postgres database
-vercel postgres create
-
-# Ensure POSTGRES_URL is set in environment
-```
-
 ## Critical Notes
 
 - **Seed Required:** Must run `pnpm run seed` after database setup
-- **Database:** PostgreSQL required (Vercel Postgres recommended)
-- **AI Dependency:** Requires OpenAI API key for functionality
+- **Database:** PostgreSQL required
+- **Environment Variables:** All values come from current environment - inspect `.env.example` for required variables
 - **No Dev Server:** Never run `pnpm dev` in VM environment
 
 ## Features
 
-- Natural language to SQL conversion using OpenAI GPT-4o
+- Natural language to SQL conversion
 - Automatic data visualization with Recharts
 - Query explanation and SQL display
 - Interactive table and chart views
