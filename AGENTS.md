@@ -22,3 +22,13 @@ A demo app that lets you ask questions in plain English and get answers from you
 Automated build and deployment guidance for this Next.js application with PostgreSQL database.
 
 Code agents can reference the skill file for complete workflow instructions.
+
+---
+
+# Data Source Connect
+
+**Skill:** `.claude/skills/data-source-connect/SKILL.md`
+
+Connect your own data source to replace the demo unicorns data. Supports connecting to an existing PostgreSQL database URL or importing a CSV file.
+
+Use this skill when users want to use their own data instead of the sample unicorns dataset.
