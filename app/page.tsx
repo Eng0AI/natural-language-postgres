@@ -82,7 +82,42 @@ export default function Page() {
   };
 
   return (
-    <div className="bg-neutral-50 dark:bg-neutral-900 flex items-start justify-center p-0 sm:p-8">
+    <>
+      {/* Built by eng0.ai Corner Ribbon */}
+      <a
+        href="https://eng0.ai"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed top-0 right-0 z-50 cursor-pointer hover:opacity-80 transition-opacity"
+      >
+        <svg width="120" height="120" viewBox="0 0 250 250">
+          <path d="M0,0 L250,250 L250,0 Z" fill="#3b82f6" />
+          <text
+            x="175"
+            y="58"
+            fill="#ffffff"
+            fontSize="20"
+            fontWeight="bold"
+            transform="rotate(45, 175, 58)"
+            textAnchor="middle"
+          >
+            Built by
+          </text>
+          <text
+            x="165"
+            y="88"
+            fill="#ffffff"
+            fontSize="28"
+            fontWeight="bold"
+            transform="rotate(45, 165, 88)"
+            textAnchor="middle"
+          >
+            eng0.ai
+          </text>
+        </svg>
+      </a>
+
+      <div className="bg-neutral-50 dark:bg-neutral-900 flex items-start justify-center p-0 sm:p-8">
       <div className="w-full max-w-4xl min-h-dvh sm:min-h-0 flex flex-col ">
         <motion.div
           className="bg-card rounded-xl sm:border sm:border-border flex-grow flex flex-col"
@@ -155,6 +190,7 @@ export default function Page() {
           <ProjectInfo />
         </motion.div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }
