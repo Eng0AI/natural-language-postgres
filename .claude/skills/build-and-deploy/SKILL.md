@@ -67,7 +67,11 @@ pnpm run build
 
 **Vercel:**
 ```bash
-vercel deploy --prod --yes
+# Build locally for production
+vercel build --prod
+
+# Deploy prebuilt (bypasses Git author permission issues)
+vercel deploy --prebuilt --prod --yes
 ```
 
 **Netlify:**
