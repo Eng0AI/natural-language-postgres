@@ -5,10 +5,6 @@ description: Build and deploy this Next.js application with PostgreSQL database.
 
 # Build and Deploy Natural Language Postgres
 
-## Overview
-
-Build and deploy the natural language PostgreSQL query application. This Next.js project provides an AI-powered natural language interface to query and visualize PostgreSQL data.
-
 ## Workflow
 
 ### 1. Setup Environment Variables
@@ -95,10 +91,3 @@ netlify deploy --prod
 - **Database:** PostgreSQL required
 - **Environment Variables:** All values come from current environment - inspect `.env.example` for required variables
 - **No Dev Server:** Never run `pnpm dev` in VM environment
-
-## Features
-
-- Natural language to SQL conversion
-- Automatic data visualization with Recharts
-- Query explanation and SQL display
-- Interactive table and chart views
